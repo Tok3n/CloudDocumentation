@@ -20,4 +20,4 @@ When you enter the Tok3n Dashboard in the Integrations section you can create th
 
 ![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/keys.png "Adquire Keys")
 
-The *API Key* field is your **Public Key** and the *Secret* field is your **Secret Key**.
+The *API Key* field is your **Public Key** and the *Secret* field is your **Secret Key**. Store them in a very secure place you will be using them.
