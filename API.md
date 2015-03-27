@@ -33,5 +33,26 @@ The next step is that in your page where the authentication is happening add the
 ```
 And in the attribute `public-key` inthead of `{{YOUR-PUBLIC-KEY}}` you will include the **Public Key** you got from the Token Cloud Dashboard. To this tag you can add any other atribute you want for example an id if you want to reference it later (you will need it).
 
-#### Custom Event
-In advance, we know that our implementation is weird, beliebe me we are working (testing) in a more standard way of calling the API. 
+#### Custom Event & Handle Response
+In advance, we know that our implementation is weird, beliebe me we are working (testing) in a more standard way of calling the API. For now, for you to know that the user has acepted a valid authentication is to add a listener to the event "response" in the previous *script* tag. Remember that we recomend to add an id attribute to the *script* tag, well this id can help you in the task of creating the custom event.
+
+For example if your id is "tok3nscripttag" you can use:
+
+```javascript
+function tok3n_response(e){
+  console.log("Tok3n responded with:");
+  console.log(e.detail);
+  //DO SOMETHING WITH THE e.detail WICH CONTAIN THE 'VALIDATION INFORMATION'
+}
+
+document.getElementById("tok3nscripttag").addEventListener('response', tok3n_response, false);
+```
+
+In this example the function `tok3n_response` is the one that take care of the response of the Token Cloud API. It will recive the information of the 'validation information' inside the `e.detail` variable.
+
+The 'validation information' is a json formated object that looks like this:
+
+```json
+{"id":"hola mundo"}
+```
+
