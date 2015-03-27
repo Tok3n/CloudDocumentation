@@ -20,4 +20,18 @@ When you enter the Tok3n Dashboard in the Integrations section you can create th
 
 ![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/keys.png "Adquire Keys")
 
-The *API Key* field is your **Public Key** and the *Secret* field is your **Secret Key**. Store them in a very secure place you will be using them.
+The *API key* field is your **Public Key** and the *Secret* field is your **Secret Key**. Store them in a very secure place you will be using them.
+
+### Import Tok3n JavaScript
+The next step is that in your page where the authentication is happening add the following tag:
+
+```html
+<script src="//secure.tok3n.com/api_v2_iframe/tok3n.js" 
+  data-tok3n-integration
+  action="authorize"
+  public-key="{{YOUR-PUBLIC-KEY}}">
+```
+And in the attribute `public-key` inthead of `{{YOUR-PUBLIC-KEY}}` you will include the **Public Key** you got from the Token Cloud Dashboard. To this tag you can add any other atribute you want for example an id if you want to reference it later (you will need it).
+
+#### Custom Event
+In advance, we know that our implementation is weird, beliebe me we are working (testing) in a more standard way of calling the API. 
