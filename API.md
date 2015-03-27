@@ -13,3 +13,11 @@ The general flow of an Tok3n Cloud API integration is the following:
 7. Re-validation from Tok3n: tok3n will respond you about the validity of the "validation information". (In case of a man in the middle atack).
 8. Optional Crypto Hash revalidation: with the information of the validation information and the response from Tok3n in the point 7 you can re calculate a hash that tells you the validity of both documents.
 
+##In depth:
+### Adquire Keys
+
+When you enter the Tok3n Dashboard in the Integrations section you can create there new integrations. Once created a screen similar to the following will be shown:
+
+![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/keys.png "Adquire Keys")
+
+The *API Key* field is your **Public Key** and the *Secret* field is your **Secret Key**.
