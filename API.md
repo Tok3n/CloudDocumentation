@@ -3,6 +3,7 @@ Here we will document the needed stepst to integrate the Tok3n Cloud API.
 To authenticate users in your integration first you need that the user where vinculated to your integration, and we thinking on you we design a pretty simple and similar way to to both steps. So when you integrate the Tok3n Cloud API you only need to learn one flow and use it for several actions.
 
 The general flow of an Tok3n Cloud API integration is the following:
+
 1. Adquire Keys: Go to the Tok3n Cloud Dashboard and adquire both of them.
 2. Import Tok3n JavaScript: Import a JS from Tok3n Cloud API with some specifications that we will explain in a moment.
 3. Custom Event: Add to the Script Tag a listener in the custom event "response"
