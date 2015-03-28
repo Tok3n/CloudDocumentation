@@ -11,7 +11,6 @@ The general flow of an Tok3n Cloud API integration is the following:
 5. Send to backend: Then you should send that validation information to your backend.
 6. Re-validate in backend: Once the validation information is in your backend you should send it again to the Tok3n Cloud API.
 7. Re-validation from Tok3n: tok3n will respond you about the validity of the "validation information". (In case of a man in the middle atack).
-8. Optional Crypto Hash revalidation: with the information of the validation information and the response from Tok3n in the point 7 you can re calculate a hash that tells you the validity of both documents.
 
 ##In depth:
 ### Adquire Keys
@@ -63,4 +62,36 @@ The 'validation information' is a json formated object that looks like this:
   "Result":""
 }
 ```
+
+From this values there is one that is fundamentally important for you. The value of `UserKey` is how the Tok3n Cloud API will call this user in your system. In further comunicacions with the Tok3n Cloud API about the current user should be in company of this value. So you might store it a side of the user record in your database.
+
+#### Send to backend
+Once you get the previous 'validation information' you should send it to your backend in any method you like. Prefereably you should send it via AJAX once you have it in the respond of the Custom Event.
+
+#### Re-validation from Tok3n
+This step is added because a men in the middle atack can happend in the previous steps. So you should call 
+'https://secure.tok3n.com/api/v2/validate' and send the following POST variables:
+
+| Variable      | Value                                             | 
+| ------------- | ------------------------------------------------- | 
+| secret_key    | Secret Key (the one from the dashboard)           |
+| user_key      | The json value of the `UserKey`                   |
+| TransactionId | The json value of the `TransactionId`             |
+| sqr           | The entire json of the 'validation information'   |
+
+If there is no error you should see a json as the following
+
+```json
+{
+  "Valid":"",
+  "CertKey":"",
+  "PublicKey":"",
+  "UserKey":"",
+  "TransactionId":"",
+  "Hash":"",
+  "Result":"VALID USER"
+}
+```
+
+But if there is an atack or an error in the data the request will call you a `ERROR: ...` or the `Result` field will show you the value `INVALID USER`.
 
