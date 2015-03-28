@@ -29,7 +29,7 @@ The next step is that in your page where the authentication is happening add the
 <script src="//secure.tok3n.com/api_v2_iframe/tok3n.js" 
   data-tok3n-integration
   action="authorize"
-  public-key="{{YOUR-PUBLIC-KEY}}">
+  public-key="{{YOUR-PUBLIC-KEY}}"></script>
 ```
 And in the attribute `public-key` inthead of `{{YOUR-PUBLIC-KEY}}` you will include the **Public Key** you got from the Token Cloud Dashboard. To this tag you can add any other atribute you want for example an id if you want to reference it later (you will need it).
 
@@ -53,6 +53,6 @@ In this example the function `tok3n_response` is the one that take care of the r
 The 'validation information' is a json formated object that looks like this:
 
 ```json
-{"id":"hola mundo"}
+{"Valid":"YES","CertKey":"7448aa2e-3463-53b8-5245-5b594be5b129","PublicKey":"9765601a-433b-5e1b-7a65-c07c555afe9d","UserKey":"37912139-5d4a-5c7a-5e93-f8db229e64a7","TransactionId":"ba4851d2-37dc-5292-626b-1beb87e3728d","Hash":"48 c9 63 52 ce e0 bd 8b 44 de d6 81 fc e7 f1 f7 70 f8 b9 53 c2 c8 9a fe d0 9f 0b f8 6b fc aa 93","Result":""}
 ```
 
