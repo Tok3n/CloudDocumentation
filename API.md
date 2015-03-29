@@ -121,4 +121,6 @@ For the *User Authentication* action the only difference is when you Import the 
 
 In the attribute `public-key` instead of `{{YOUR-PUBLIC-KEY}}` you will include the **Public Key** you got from the Tok3n Cloud Dashboard, and in the attribute `user-key` instead of `{{THE-USER-KEY}}` you will use the `UserKey` of the Tok3n Cloud API User (the one we tell you to store a side with the user in the database). Again to this tag you can add any other attribute you want for example an **id** if you want to reference it later (you will need it).
 
+When you insert his tag only the QR will appear because in this scenario we already know who is trying to autenticate.
+
 In all the other steps, the way the Tok3n Cloud API works is the same as in the *User Vinculation*.
