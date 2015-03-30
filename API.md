@@ -26,7 +26,7 @@ When you enter the Tok3n Dashboard, in the Integrations section, you can create 
 The *API key* field is your **Public Key** and the *Secret* field is your **Secret Key**. Store them in a very secure place you will be using them later.
 
 ### Import Tok3n JavaScript
-Now in your page, where the authentication is happening, add the following tag:
+Now in your page, where the authentication is planned, add the following tag:
 
 ```html
 <script src="//secure.tok3n.com/api_v2_iframe/tok3n.js" 
@@ -40,7 +40,6 @@ And in the attribute `public-key` instead of `{{YOUR-PUBLIC-KEY}}` you will incl
 When this JS in added, an iframe from the Tok3n Cloud will appear over your screen asking user for their Tok3n credentials. As shown in following screens:
 
 ![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/login1.png "Login 1")
-![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/login2.png "Login 2")
 
 #### Custom Event & Handle Response
 In advance, we know that our implementation is weird, believe us we are working (testing) in a more standard way of calling the API. For now, you will know that the user has accepted a valid authentication when the custom event "response" is called in the previous *script* tag. Remember that we recommend to add an id attribute to the *script* tag, well this **id** can help you in the task of creating the custom event.
