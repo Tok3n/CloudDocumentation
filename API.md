@@ -1,65 +1,71 @@
 # Tok3n Cloud API documentation
-The Tok3n Cloud API works for two actions:
+The Tok3n Cloud API provides two actions:
 
-1. User Vinculation: to add a Tok3n user to your integration
-2. User Authentication: once the user is viculated you can just ask for a secure authentication.
+1. User Vinculation: to add a new Tok3n user to your integration
+2. User Authentication: once the user has been viculated, start a  secure authentication.
 
-Here we will explain the needed steps to integrate both actions in the Tok3n Cloud API:
+The needed steps to integrate both actions in the Tok3n Cloud API are as follows:
 
-1. Acquire Keys: Go to the Tok3n Cloud Dashboard and acquire both of them.
-2. Import Tok3n JavaScript: Import a JS from Tok3n Cloud API with some specifications that we will explain in a moment.
-3. Custom Event: Add to the Script Tag a listener in the custom event "response"
-4. Handle Response: In the response the event will send you some "validation information" formatted in JSON.
+1. Acquire integration keys: Go to the Tok3n Cloud Dashboard and acquire both of them.
+2. Load the Tok3n JavaScript snippet in frontend: Load the Tok3n script in your webpage.
+3. Listen for Tok3n Event: Add an eventListener for the Tok3n response.
+4. Handle Response: The event response will contain the "validation information" formatted as JSON.
 5. Send to backend: Then you should send that validation information to your backend.
 6. Re-validate in backend: Once the validation information is in your backend you should send it again to the Tok3n Cloud API.
 7. Re-validation from Tok3n: tok3n will respond you about the validity of the "validation information".
 
 NOTE: This steps are the same for both actions to ensure that when we add more functionality you don't have to add any more steps to handle the new functionality.
 
-##In depth for *User Vinculation*:
+##*User Vinculation* in depth:
 ### Acquire Keys
 
-When you enter the Tok3n Dashboard, in the Integrations section, you can create new integrations. Once created an integration, a screen similar to the following will be shown:
+Login to the the Tok3n Dashboard, select the Integrations tab on the left. Select your current integration or create a new one.
 
 ![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/keys.png "Adquire Keys")
 
-The *API key* field is your **Public Key** and the *Secret* field is your **Secret Key**. Store them in a very secure place you will be using them later.
+The *API key* field is your **Public Key** and the *Secret* field is your **Secret Key**. Keep them in a secure place.
 
-### Import Tok3n JavaScript
-Now in your page, where the authentication is planned, add the following tag:
+### Load Javascript Snippet
+Insert the following tag in the webpage you plan to use Tok3n authentication:
+
+<!-- Siguiente version: quitar id, agregar data- -->
 
 ```html
-<script src="//secure.tok3n.com/api_v2_iframe/tok3n.js" 
+<script src="//secure.tok3n.com/api_v2_iframe/tok3n.js"
+  id="tok3nSnippet"
   data-tok3n-integration
   action="authorize"
   public-key="{{YOUR-PUBLIC-KEY}}"></script>
 ```
 
-And in the attribute `public-key` instead of `{{YOUR-PUBLIC-KEY}}` you will include the **Public Key** you got from the Tok3n Cloud Dashboard. To this tag you can add any other attribute you want for example an **id** if you want to reference it later (you will need it).
+Replace the `{{YOUR-PUBLIC-KEY}}` placeholder with the **Public Key** retreived from the Tok3n Dashboard.
 
-When this JS in added, an iframe from the Tok3n Cloud will appear over your screen asking user for their Tok3n credentials. As shown in following screens:
+<!-- Siguiente version: llamar al script con js -->
+
+A couple of seconds after the script has been placed in the html, the Tok3n modal window will appear on top of your web content. The authentication process will begin for the user:
 
 ![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/login1.png "Login 1")
 
 #### Custom Event & Handle Response
-In advance, we know that our implementation is weird, believe us we are working (testing) in a more standard way of calling the API. For now, you will know that the user has accepted a valid authentication when the custom event "response" is called in the previous *script* tag. Remember that we recommend to add an id attribute to the *script* tag, well this **id** can help you in the task of creating the custom event.
+In advance, we know that our implementation is weird, sorry for that. We are working currently working in better way of calling the API.
 
-For example if your **id** is "tok3nscripttag" you can use:
+For now, you will know that the user has accepted a valid authentication when the custom event "response" triggered in the Tok3n *script* tag.
 
 ```javascript
 // JAVASCRIPT CODE
-function tok3n_response(e){
-  console.log("Tok3n responded with:");
+function tok3nResponse(e){
+  console.log("Tok3n response:");
   console.log(e.detail);
-  //DO SOMETHING WITH THE e.detail WHICH CONTAIN THE 'VALIDATION INFORMATION'
+  // You can then do something with e.detail
+  // which contains the Tok3n response.
 }
 
-document.getElementById("tok3nscripttag").addEventListener('response', tok3n_response, false);
+document.getElementById("tok3nSnippet").addEventListener('response', tok3nResponse, false);
 ```
 
-In this example the function `tok3n_response` is the one that take care of the response of the Token Cloud API. It will receive the information of the 'validation information' inside the `e.detail` variable.
+In this example the function `tok3nResponse` handles the response of the Token Cloud API. It will receive the information of the 'validation information' in `e.detail`.
 
-The 'validation information' is a json formatted object that looks like this:
+The 'validation information' will be a json formatted object similar to this:
 
 ```json
 {
@@ -84,7 +90,7 @@ This step is added to add more security. So you should call
 
 | Variable      | Value                                             | 
 | ------------- | ------------------------------------------------- | 
-| secret_key    | Secret Key (the one from the dashboard)           |
+| secret_key    | Secret Key (retrieved from the dashboard)           |
 | user_key      | The json value of the `UserKey`                   |
 | TransactionId | The json value of the `TransactionId`             |
 | sqr           | The entire json of the 'validation information'   |
@@ -107,19 +113,20 @@ But if there is an attack or an error in the data the request will call you a `E
 
 And that's pretty much it. 
 
-## Now *User Authentication*:
-For the *User Authentication* action the only difference is when you Import the Tok3n JavaScript. Instead of the tag we have show you previously you should use the following code:
+## *User Authentication*:
+The only difference for the *User Authentication* is the action attribute "authenticate" in the Tok3n snippet.
 
 ```html
 <script src="//secure.tok3n.com/api_v2_iframe/tok3n.js" 
+  id="tok3nSnippet"
   data-tok3n-integration
   action="authenticate"
   public-key="{{YOUR-PUBLIC-KEY}}"
   user-key="{{THE-USER-KEY}}"></script>
 ```
 
-In the attribute `public-key` instead of `{{YOUR-PUBLIC-KEY}}` you will include the **Public Key** you got from the Tok3n Cloud Dashboard, and in the attribute `user-key` instead of `{{THE-USER-KEY}}` you will use the `UserKey` of the Tok3n Cloud API User (the one we tell you to store a side with the user in the database). Again to this tag you can add any other attribute you want for example an **id** if you want to reference it later (you will need it).
+Replace the placeholder `{{YOUR-PUBLIC-KEY}}` with the **Public Key** retrieved from the Tok3n Dashboard, and the `{{THE-USER-KEY}}` placeholder with the `UserKey` received in the vinculation process.
 
-When you insert his tag only the QR will appear because in this scenario we already know who is trying to autenticate.
+When you insert this tag only the QR code will appear because in this scenario we already know who is trying to autenticate.
 
-In all the other steps, the way the Tok3n Cloud API works is the same as in the *User Vinculation*.
+In all the other steps, the way the Tok3n Cloud API works the same as in the *User Vinculation* process.
