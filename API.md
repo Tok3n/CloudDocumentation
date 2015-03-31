@@ -127,6 +127,8 @@ The only difference for the *User Authentication* is the action attribute "authe
 
 Replace the placeholder `{{YOUR-PUBLIC-KEY}}` with the **Public Key** retrieved from the Tok3n Dashboard, and the `{{THE-USER-KEY}}` placeholder with the `UserKey` received in the vinculation process.
 
-When you insert this tag only the QR code will appear because in this scenario we already know who is trying to autenticate.
+When you insert this tag only the QR code will appear (as shown in the next image) because in this scenario we already know who is trying to autenticate.
+
+![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/login2.png "Login 2")
 
 In all the other steps, the way the Tok3n Cloud API works the same as in the *User Vinculation* process.
