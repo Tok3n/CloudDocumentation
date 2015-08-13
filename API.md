@@ -26,44 +26,44 @@ Login to the the Tok3n Dashboard, select the Integrations tab on the left. Selec
 The *API key* field is your **Public Key** and the *Secret* field is your **Secret Key**. Keep them in a secure place.
 
 ### Load Javascript Snippet
-Insert the following tag in the webpage you plan to use Tok3n authentication:
-
-<!-- Siguiente version: quitar id, agregar data- -->
+Insert the following script tag in the bottom of webpage you plan to use Tok3n authentication:
 
 ```html
-<script src="//secure.tok3n.com/api_v2_iframe/tok3n.js"
-  id="tok3nSnippet"
-  data-tok3n-integration
-  action="authorize"
-  public-key="{{YOUR-PUBLIC-KEY}}"></script>
+<script src="https://secure.tok3n.com/api_v2_iframe/tok3n2.js"></script>
 ```
 
-Replace the `{{YOUR-PUBLIC-KEY}}` placeholder with the **Public Key** retreived from the Tok3n Dashboard.
+This will allow you to have the `Tok3n` Javascript object available. 
 
-<!-- Siguiente version: llamar al script con js -->
+When you are ready to run the Tok3n integration just call:
 
-A couple of seconds after the script has been placed in the html, the Tok3n modal window will appear on top of your web content. The authentication process will begin for the user:
+```javascript
+Tok3n.showIFrame("authorize", "{{YOUR-PUBLIC-KEY}}", "",tok3nResonseMethod);
+```
+
+Replace the `{{YOUR-PUBLIC-KEY}}` placeholder with the **Public Key** retreived from the Tok3n Dashboard. And the `tok3nResonseMethod` for the name of the method that will be called when the Authentication has a response.
+
+A couple of seconds after the method `Tok3n.showIFrame()` has been called, the Tok3n modal window will appear on top of your web content. The authentication process will begin for the user:
 
 ![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/login1.png "Login 1")
 
-#### Custom Event & Handle Response
-In advance, we know that our implementation is weird, sorry for that. We are working currently working in better way of calling the API.
+#### Handle Response
 
-For now, you will know that the user has accepted a valid authentication when the custom event "response" triggered in the Tok3n *script* tag.
+For now, you will know that the user has accepted a valid authentication when method "tok3nResonseMethod" is called.
+
+A simple examplo of this is the followind method:
 
 ```javascript
 // JAVASCRIPT CODE
-function tok3nResponse(e){
+function tok3nResonseMethod(e){
   console.log("Tok3n response:");
   console.log(e.detail);
   // You can then do something with e.detail
   // which contains the Tok3n response.
 }
 
-document.getElementById("tok3nSnippet").addEventListener('response', tok3nResponse, false);
 ```
 
-In this example the function `tok3nResponse` handles the response of the Token Cloud API. It will receive the information of the 'validation information' in `e.detail`.
+In this example the function `tok3nResonseMethod ` handles the response of the Token Cloud API. It will receive the information of the 'validation information' in `e.detail`.
 
 The 'validation information' will be a json formatted object similar to this:
 
@@ -82,11 +82,11 @@ The 'validation information' will be a json formatted object similar to this:
 From this values there is one that is fundamentally important for you. The value of `UserKey` is how the Tok3n Cloud API will call this user in your system. In further communications with the Tok3n Cloud API about the current user, should be in company of this value. So you might store it a side of the user record in your database.
 
 #### Send to backend
-Once you get the previous 'validation information' you should send it to your backend in any method you like. Preferably you should send it via AJAX once you have it in the response of the Custom Event.
+Once you get the previous 'validation information' you should send it to your backend in any method you like.
 
 #### Re-validation from Tok3n
-This step is added to add more security. So you should call 
-'https://secure.tok3n.com/api/v2/validate' and send the following variables via POST:
+This step is added to ensure more security. So you should call 
+`https://secure.tok3n.com/api/v2/validate` and send the following variables via POST:
 
 | Variable      | Value                                             | 
 | ------------- | ------------------------------------------------- | 
@@ -114,18 +114,15 @@ But if there is an attack or an error in the data the request will call you a `E
 And that's pretty much it. 
 
 ## *User Authentication*:
-The only difference for the *User Authentication* is the action attribute "authenticate" in the Tok3n snippet.
+The authentication happends when you user already has autorized at least once with your integration and you already have it UserKey.
+
+The differences for the *User Authentication* is the action attribute (the fist one) **"authenticate"** instead of "authorize". And the third argument you provide the **UserKey** as follow:
 
 ```html
-<script src="//secure.tok3n.com/api_v2_iframe/tok3n.js" 
-  id="tok3nSnippet"
-  data-tok3n-integration
-  action="authenticate"
-  public-key="{{YOUR-PUBLIC-KEY}}"
-  user-key="{{THE-USER-KEY}}"></script>
+Tok3n.showIFrame("authenticate", "{{YOUR-PUBLIC-KEY}}", "{{THE-USER-KEY}}", tok3nResonseMethod);
 ```
 
-Replace the placeholder `{{YOUR-PUBLIC-KEY}}` with the **Public Key** retrieved from the Tok3n Dashboard, and the `{{THE-USER-KEY}}` placeholder with the `UserKey` received in the vinculation process.
+Replace the placeholder `{{YOUR-PUBLIC-KEY}}` with the **Public Key** retrieved from the Tok3n Dashboard, and the `{{THE-USER-KEY}}` placeholder with the **UserKey** received in the vinculation process.
 
 When you insert this tag only the QR code will appear (as shown in the next image) because in this scenario we already know who is trying to autenticate.
 
