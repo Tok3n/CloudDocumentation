@@ -2,13 +2,12 @@
 The Tok3n Cloud API provides two actions:
 
 1. User Vinculation: to add a new Tok3n user to your integration
-2. User Authentication: once the user has been viculated, start a  secure authentication.
+2. User Authentication: once the user has been vinculated, start a  secure authentication.
 
 The needed steps to integrate both actions in the Tok3n Cloud API are as follows:
 
 1. Acquire integration keys: Go to the Tok3n Cloud Dashboard and acquire both of them.
-2. Load the Tok3n JavaScript snippet in frontend: Load the Tok3n script in your webpage.
-3. Listen for Tok3n Event: Add an eventListener for the Tok3n response.
+2. Load the Tok3n JavaScript snippet in front-end: Load the Tok3n script in your webpage.
 4. Handle Response: The event response will contain the "validation information" formatted as JSON.
 5. Send to backend: Then you should send that validation information to your backend.
 6. Re-validate in backend: Once the validation information is in your backend you should send it again to the Tok3n Cloud API.
@@ -21,7 +20,7 @@ NOTE: This steps are the same for both actions to ensure that when we add more f
 
 Login to the the Tok3n Dashboard, select the Integrations tab on the left. Select your current integration or create a new one.
 
-![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/keys.png "Adquire Keys")
+![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/keys.png "Acquire Keys")
 
 The *API key* field is your **Public Key** and the *Secret* field is your **Secret Key**. Keep them in a secure place.
 
@@ -40,7 +39,7 @@ When you are ready to run the Tok3n integration just call:
 Tok3n.showIFrame("authorize", "{{YOUR-PUBLIC-KEY}}", "",tok3nResonseMethod);
 ```
 
-Replace the `{{YOUR-PUBLIC-KEY}}` placeholder with the **Public Key** retreived from the Tok3n Dashboard. And the `tok3nResonseMethod` for the name of the method that will be called when the Authentication has a response.
+Replace the `{{YOUR-PUBLIC-KEY}}` placeholder with the **Public Key** retrieved from the Tok3n Dashboard. And the `tok3nResonseMethod` for the name of the method that will be called when the Authentication has a response.
 
 A couple of seconds after the method `Tok3n.showIFrame()` has been called, the Tok3n modal window will appear on top of your web content. The authentication process will begin for the user:
 
@@ -50,7 +49,7 @@ A couple of seconds after the method `Tok3n.showIFrame()` has been called, the T
 
 For now, you will know that the user has accepted a valid authentication when method "tok3nResonseMethod" is called.
 
-A simple examplo of this is the followind method:
+A simple example of this is the following method:
 
 ```javascript
 // JAVASCRIPT CODE
@@ -114,7 +113,7 @@ But if there is an attack or an error in the data the request will call you a `E
 And that's pretty much it. 
 
 ## *User Authentication*:
-The authentication happends when you user already has autorized at least once with your integration and you already have it UserKey.
+The authentication happen when you user already has authorized at least once with your integration and you already have it UserKey.
 
 The differences for the *User Authentication* is the action attribute (the fist one) **"authenticate"** instead of "authorize". And the third argument you provide the **UserKey** as follow:
 
@@ -124,7 +123,7 @@ Tok3n.showIFrame("authenticate", "{{YOUR-PUBLIC-KEY}}", "{{THE-USER-KEY}}", tok3
 
 Replace the placeholder `{{YOUR-PUBLIC-KEY}}` with the **Public Key** retrieved from the Tok3n Dashboard, and the `{{THE-USER-KEY}}` placeholder with the **UserKey** received in the vinculation process.
 
-When you insert this tag only the QR code will appear (as shown in the next image) because in this scenario we already know who is trying to autenticate.
+When you insert this tag only the QR code will appear (as shown in the next image) because in this scenario we already know who is trying to authenticate.
 
 ![alt text](https://raw.githubusercontent.com/Tok3n/CloudDocumentation/master/API/login2.png "Login 2")
 
