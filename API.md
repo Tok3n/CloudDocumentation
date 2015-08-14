@@ -8,10 +8,10 @@ The needed steps to integrate both actions in the Tok3n Cloud API are as follows
 
 1. Acquire integration keys: Go to the Tok3n Cloud Dashboard and acquire both of them.
 2. Load the Tok3n JavaScript snippet in front-end: Load the Tok3n script in your webpage.
-4. Handle Response: The event response will contain the "validation information" formatted as JSON.
-5. Send to backend: Then you should send that validation information to your backend.
-6. Re-validate in backend: Once the validation information is in your backend you should send it again to the Tok3n Cloud API.
-7. Re-validation from Tok3n: tok3n will respond you about the validity of the "validation information".
+3. Handle Response: The event response will contain the "validation information" formatted as JSON.
+4. Send to backend: Then you should send that validation information to your backend.
+5. Re-validate in backend: Once the validation information is in your backend you should send it again to the Tok3n Cloud API.
+6. Re-validation from Tok3n: tok3n will respond you about the validity of the "validation information".
 
 NOTE: This steps are the same for both actions to ensure that when we add more functionality you don't have to add any more steps to handle the new functionality.
 
