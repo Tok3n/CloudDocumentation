@@ -133,4 +133,8 @@ When you insert this tag only the QR code will appear (as shown in the next imag
 
 In all the other steps, the way the Tok3n Cloud API works the same as in the *User Vinculation* process.
 
+##*An example*
+Can be finded in the following link.
+[An Example](https://github.com/Tok3n/CloudDocumentation/blob/master/API_example/example.html "An Example")
+
 Send comments here http://goo.gl/forms/yMiOYifjGT
