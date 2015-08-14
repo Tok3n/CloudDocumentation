@@ -6,12 +6,11 @@ The Tok3n Cloud API provides two actions:
 
 The needed steps to integrate both actions in the Tok3n Cloud API are as follows:
 
-1. Acquire integration keys: Go to the Tok3n Cloud Dashboard and acquire both of them.
-2. Load the Tok3n JavaScript snippet in front-end: Load the Tok3n script in your webpage.
-3. Handle Response: The event response will contain the "validation information" formatted as JSON.
-4. Send to backend: Then you should send that validation information to your backend.
-5. Re-validate in backend: Once the validation information is in your backend you should send it again to the Tok3n Cloud API.
-6. Re-validation from Tok3n: tok3n will respond you about the validity of the "validation information".
+1. Acquire integration keys from the Tok3n Cloud Dashboard.
+2. Load the Tok3n JavaScript snippet in your webpage.
+3. Handle API Response.
+4. Send to backend.
+5. Re-validate in backend.
 
 NOTE: This steps are the same for both actions to ensure that when we add more functionality you don't have to add any more steps to handle the new functionality.
 
@@ -62,9 +61,9 @@ function tok3nResonseMethod(e){
 
 ```
 
-In this example the function `tok3nResonseMethod` handles the response of the Token Cloud API. It will receive the information of the 'validation information' in `e.detail`.
+In this example the function `tok3nResonseMethod` handles the response of the Token Cloud API. It will receive the information of the 'validation data' in `e.detail`.
 
-The 'validation information' will be a json formatted object similar to this:
+The 'validation data' will be a JSON formatted object similar to this:
 
 ```json
 {
@@ -81,7 +80,7 @@ The 'validation information' will be a json formatted object similar to this:
 From this values there is one that is fundamentally important for you. The value of `UserKey` is how the Tok3n Cloud API will call this user in your system. In further communications with the Tok3n Cloud API about the current user, it should be in company of this value. So you might store it aside of the user record in your database.
 
 #### Send to backend
-Once you get the previous 'validation information' you should send it to your backend in any method you like.
+Once you get the previous 'validation data' you should send it to your backend in any method you like.
 
 #### Re-validation from Tok3n
 This step is added to ensure more security. So you should call 
@@ -90,11 +89,11 @@ This step is added to ensure more security. So you should call
 | Variable      | Value                                             | 
 | ------------- | ------------------------------------------------- | 
 | secret_key    | Secret Key (retrieved from the dashboard)           |
-| user_key      | The json value of the `UserKey`                   |
-| TransactionId | The json value of the `TransactionId`             |
-| sqr           | The entire json of the 'validation information'   |
+| user_key      | The JSON value of the `UserKey`                   |
+| TransactionId | The JSON value of the `TransactionId`             |
+| sqr           | The entire JSON of the 'validation data'   |
 
-If there is no error you should see a json as the following
+If there is no error you should see a JSON as the following
 
 ```json
 {
