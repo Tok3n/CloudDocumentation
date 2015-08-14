@@ -47,9 +47,9 @@ A couple of seconds after the method `Tok3n.showIFrame()` has been called, the T
 
 #### Handle Response
 
-For now, you will know that the user has accepted a valid authentication when method "tok3nResonseMethod" is called.
+For now, you will know that the user has accepted a valid authentication when method `tok3nResonseMethod` is called.
 
-A simple example of this is the following method:
+A example of this is the following method:
 
 ```javascript
 // JAVASCRIPT CODE
@@ -62,7 +62,7 @@ function tok3nResonseMethod(e){
 
 ```
 
-In this example the function `tok3nResonseMethod ` handles the response of the Token Cloud API. It will receive the information of the 'validation information' in `e.detail`.
+In this example the function `tok3nResonseMethod` handles the response of the Token Cloud API. It will receive the information of the 'validation information' in `e.detail`.
 
 The 'validation information' will be a json formatted object similar to this:
 
@@ -78,7 +78,7 @@ The 'validation information' will be a json formatted object similar to this:
 }
 ```
 
-From this values there is one that is fundamentally important for you. The value of `UserKey` is how the Tok3n Cloud API will call this user in your system. In further communications with the Tok3n Cloud API about the current user, should be in company of this value. So you might store it a side of the user record in your database.
+From this values there is one that is fundamentally important for you. The value of `UserKey` is how the Tok3n Cloud API will call this user in your system. In further communications with the Tok3n Cloud API about the current user, it should be in company of this value. So you might store it aside of the user record in your database.
 
 #### Send to backend
 Once you get the previous 'validation information' you should send it to your backend in any method you like.
@@ -110,10 +110,15 @@ If there is no error you should see a json as the following
 
 But if there is an attack or an error in the data the request will call you a `ERROR: ...` or the `Result` field will show you the value `INVALID USER`.
 
-And that's pretty much it. 
+And that's pretty much of it. 
 
 ## *User Authentication*:
-The authentication happen when you user already has authorized at least once with your integration and you already have it UserKey.
+The authentication happen when you user already has authorized at least once with your integration and you already have its UserKey.
+
+<!---
+The authentication happens when the user you sent has been authorized at least once  and you have recieved its UserKey.
+-->
+
 
 The differences for the *User Authentication* is the action attribute (the fist one) **"authenticate"** instead of "authorize". And the third argument you provide the **UserKey** as follow:
 
