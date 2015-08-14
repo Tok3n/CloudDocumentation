@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Tok3n - Connect</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+  <button id="tok3n-authorize" onclick='Tok3n.showIFrame("authorize", "12345678-90ab-cdef-1234-567890abcdef", "",tok3nresonse);'>Authorize with Tok3n</button>
+  <button id="tok3n-authenticate" onclick='Tok3n.showIFrame("authenticate", "12345678-90ab-cdef-1234-567890abcdef", "user-key",tok3nresonse);'>Authenticate with Tok3n</button>
+    <script src="https://secure.tok3n.com/api_v2_iframe/tok3n2.js">
+    </script>
+    <script src="js/test.js?1439151013"></script>
+    <script>
+        function tok3nresonse(e){
+            console.log(e);
+        }
+    </script>
+  </body>
+</html>
